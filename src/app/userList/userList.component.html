@@ -1,7 +1,13 @@
 <div>
     User's List
 </div>
+<br />
+
+<input type="text" placeholder="Name" (change)="setNewUsername($event)" />
+<input type="number" placeholder=999 (change)="setNewAge($event)" />
+<button (click)="addUser()">Add user</button>
 
 <div *ngFor="let user of users">
     {{ user.name}} is {{ user.age }} years old
+    <span (click)="removeUser(user.id)">Remove</span>
 </div>
