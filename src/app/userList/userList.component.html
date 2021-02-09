@@ -3,11 +3,13 @@
 </div>
 <br />
 
-<input type="text" placeholder="Name" (change)="setNewUsername($event)" />
-<input type="number" placeholder=999 (change)="setNewAge($event)" />
+<input type="text" placeholder="Name" (change)="setNewUsername($event)" [value]="newUserName" />
+<input type="number" placeholder=999 (change)="setNewAge($event)" [value]="newAge" />
 <button (click)="addUser()">Add user</button>
 
-<div *ngFor="let user of users">
-    {{ user.name}} is {{ user.age }} years old
+<div class="user-container" *ngFor="let user of users">
+    <span>
+        {{ user.name}} is {{ user.age }} years old
+    </span>
     <span (click)="removeUser(user.id)">Remove</span>
 </div>

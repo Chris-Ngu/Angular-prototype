@@ -1,33 +1,22 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { user } from '../types';
 
 @Component({
     selector: 'app-users-list',
     templateUrl: "./userList.component.html",
-    // styleUrls: ["./userLIst.component.css"]
+    styleUrls: ["./userLIst.component.css"]
 })
 
 export class userListComponent {
-    newUserName: string = "";
-    newAge: number = -1;
+    newUserName: string;
+    newAge: number;
+    @Input() users: user[];
 
-    // testUsers = ['Jack', "John", "Jim"];
-    users = [
-        {
-            id: 1,
-            name: "jack",
-            age: 21
-        },
-        {
-            id: 2,
-            name: "john",
-            age: 25
-        },
-        {
-            id: 3,
-            name: "jim",
-            age: 29
-        }
-    ];
+    constructor() {
+        this.users = [];
+        this.newAge = 0;
+        this.newUserName = "";
+    }
 
     removeUser = (userid: number): void => {
         this.users = this.users.filter(user => user.id !== userid);
@@ -42,7 +31,7 @@ export class userListComponent {
     }
 
     addUser = (): void => {
-        if (this.newUserName.length === 0 || this.newAge === -1) {
+        if (this.newUserName.length === 0 || this.newAge <= 0) {
             return;
         }
         const uniqueID = Math.random()
@@ -53,5 +42,6 @@ export class userListComponent {
         };
         this.users.push(newUser);
         this.newUserName = "";
+        this.newAge = 0;
     }
 }

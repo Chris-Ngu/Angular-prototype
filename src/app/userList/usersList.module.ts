@@ -5,7 +5,7 @@ import { userListComponent } from './userList.component';
 @NgModule({
     declarations: [userListComponent],
     imports: [CommonModule],
-    exports: [userListComponent]
+    exports: [userListComponent],
 })
 
 export class UsersListModule { }
