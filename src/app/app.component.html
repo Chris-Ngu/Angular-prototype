@@ -1,2 +1,2 @@
 <h1>Homepage</h1>
-<app-users-list [users]="users"></app-users-list>
+<app-users-list [users]="users" (removeUser)="removeUser($event)" (addUserEvent)="addUser($event)"></app-users-list>

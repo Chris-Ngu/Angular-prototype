@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { user } from '../types';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { userInterface } from '../types';
 
 @Component({
     selector: 'app-users-list',
@@ -10,16 +10,14 @@ import { user } from '../types';
 export class userListComponent {
     newUserName: string;
     newAge: number;
-    @Input() users: user[];
+    @Input() users: userInterface[];
+    @Output() removeUser = new EventEmitter()
+    @Output() addUserEvent = new EventEmitter()
 
     constructor() {
         this.users = [];
         this.newAge = 0;
         this.newUserName = "";
-    }
-
-    removeUser = (userid: number): void => {
-        this.users = this.users.filter(user => user.id !== userid);
     }
 
     setNewUsername = (nameEvent: Event | null): void => {
@@ -30,18 +28,14 @@ export class userListComponent {
         this.newAge = parseInt((ageEvent!.target as HTMLInputElement).value);
     }
 
-    addUser = (): void => {
-        if (this.newUserName.length === 0 || this.newAge <= 0) {
-            return;
+    addUser = (name: string): void => {
+        if (this.newUserName.length > 0 && this.newAge !== 0) {
+            this.addUserEvent.emit({
+                username: this.newUserName,
+                age: this.newAge
+            });
+            this.newUserName = "";
+            this.newAge = 0;
         }
-        const uniqueID = Math.random()
-        const newUser = {
-            id: uniqueID,
-            name: this.newUserName,
-            age: this.newAge
-        };
-        this.users.push(newUser);
-        this.newUserName = "";
-        this.newAge = 0;
     }
 }

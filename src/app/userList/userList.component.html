@@ -11,5 +11,5 @@
     <span>
         {{ user.name}} is {{ user.age }} years old
     </span>
-    <span (click)="removeUser(user.id)">Remove</span>
+    <span (click)="removeUser.emit(user.id)">Remove</span>
 </div>
